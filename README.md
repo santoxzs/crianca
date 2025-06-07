@@ -2,124 +2,209 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Para o amor da minha vida</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para Meu Amor ❤️</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
-      background: #fff;
-      overflow-x: hidden;
+      height: 100%;
+      background: #b22222;
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       text-align: center;
     }
 
-    #envelope-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      cursor: pointer;
-    }
-
-    #envelope {
-      width: 200px;
-      transition: transform 1s ease;
-    }
-
-    #clique {
-      margin-top: 10px;
-      font-size: 1.2rem;
-      color: #444;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .chuva {
+    canvas {
       position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
       width: 100%;
       height: 100%;
-      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsSAAALEgHS3X78AAAAvUlEQVRoge3XMQrCQBBF0SXsB1s7kV3cIS20A7ZBTkGoY5OQj/vbcTr/2HnRkBAAAAAADgMe7Ac40pEqZi4rbmZk7d91aCoivchUg5pMXYwTw2ZGPi/0VwrMNtkfEsg9YoILZ1h8VkjYQ3bVSEUTNjNgMVmIUAvybG7AoUlhWzBFJJT1YDa9WymCvhAVZXgCHuBKu0jeWYgNdU+hC0roGgAAAAASUVORK5CYII=');
-      background-repeat: repeat;
-      animation: coracoes 10s linear infinite;
-      opacity: 0.3;
-      z-index: -1;
     }
 
-    @keyframes coracoes {
-      0% {
-        background-position: 0 -100%;
-      }
-      100% {
-        background-position: 0 100%;
-      }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 90%;
+      user-select: none;
     }
 
     .polaroid {
-      background: #fff;
-      padding: 15px;
-      margin: 40px auto;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      background: white;
+      padding: 10px;
       border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+      cursor: pointer;
     }
 
     .polaroid img {
       width: 100%;
-      cursor: pointer;
       border-radius: 5px;
-      transition: 0.5s;
+      display: block;
+      margin: 0 auto;
+      max-width: 350px;
+      animation: pulse 3s infinite;
     }
 
-    .mensagem {
-      margin-top: 20px;
-      font-size: 1rem;
-      color: #333;
+    .caption {
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #b22222;
+      font-weight: bold;
     }
 
-    .hint {
-      font-size: 0.9rem;
-      color: #888;
-      margin-bottom: 10px;
+    .text-below {
+      font-size: 1.4em;
+      margin-bottom: 20px;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    }
+
+    iframe.spotify-player {
+      border-radius: 12px;
+      width: 100%;
+      height: 80px;
+      border: none;
+      margin-bottom: 15px;
+    }
+
+    .lyrics {
+      font-size: 1.1em;
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      white-space: pre-wrap;
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-weight: normal;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
     }
   </style>
 </head>
 <body>
-  <div id="envelope-container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Envelope_icon.svg/200px-Envelope_icon.svg.png" alt="Envelope" id="envelope" />
-    <p id="clique">clique</p>
-  </div>
+  <canvas id="heartCanvas"></canvas>
 
-  <div id="conteudo" class="hidden">
-    <div class="chuva"></div>
-    <div class="polaroid">
-      <p class="hint">clique na foto e veja a mágica</p>
-      <img src="https://i.postimg.cc/HVxrX9W2/foto-pb.jpg" id="foto" alt="Foto do casal" />
-      <p class="mensagem">
-        você na minha vida é tão especial assim como o impala é especial para o Dean, você chegou na minha vida e a mudou por completo, meus dias passaram a ter mais cor e a minha vida passou a ser mais feliz, não pude comprar um presente mas fiz isso para você. saiba que eu te amo muito meu amor da minha vida 🩷✨️
-      </p>
+  <div class="container">
+    <div class="polaroid" title="Clique na foto e veja a mágica ✨">
+      <img id="mainImage" src="https://i.postimg.cc/HVxrX9W2/foto-pb.jpg" alt="Casal" />
+      <div class="caption">Clique na foto e veja a mágica ✨</div>
     </div>
+
+    <div class="text-below">
+      você na minha vida é tão especial assim como o impala é especial para o Dean, você chegou na minha vida e a mudou por completo, meus dias passaram a ter mais cor e a minha vida passou a ser mais feliz, não pude comprar um presente mas fiz isso para você. saiba que eu te amo muito meu amor da minha vida 🩷✨️
+    </div>
+
+    <iframe
+      class="spotify-player"
+      src="https://open.spotify.com/embed/track/5PT9tP3oj4SQByxzjxj0hR"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      allowfullscreen
+      loading="lazy"
+      title="Spotify Player"
+    ></iframe>
+
+    <pre class="lyrics">
+Oh, she knows what I think about
+And what I think about
+One love, two mouths
+One love, one house
+No shirt, no blouse
+Just us, you find out
+Nothing that I wouldn't wanna tell you about, no
+'Cause it's too cold
+For you here
+And now, so let me hold
+Both your hands in the holes of my sweater
+    </pre>
   </div>
 
   <script>
-    const envelope = document.getElementById("envelope");
-    const conteudo = document.getElementById("conteudo");
-    const foto = document.getElementById("foto");
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+    let hearts = [];
 
-    envelope.addEventListener("click", () => {
-      envelope.style.transform = "rotateX(180deg)";
-      setTimeout(() => {
-        document.getElementById("envelope-container").classList.add("hidden");
-        conteudo.classList.remove("hidden");
-      }, 1000);
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createHeart() {
+      return {
+        x: Math.random() * canvas.width,
+        y: -10,
+        size: Math.random() * 0.6 + 0.4,
+        dy: Math.random() * 1 + 1,
+        color: 'pink',
+      };
+    }
+
+    function drawHeart(x, y, size, color) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(size, size);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.bezierCurveTo(0, -3, -3, -3, -3, 0);
+      ctx.bezierCurveTo(-3, 3, 0, 5, 0, 6);
+      ctx.bezierCurveTo(0, 5, 3, 3, 3, 0);
+      ctx.bezierCurveTo(3, -3, 0, -3, 0, 0);
+      ctx.fillStyle = color;
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 10;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Adiciona novos corações (chuva)
+      if (hearts.length < 150) { // controla a quantidade máxima para performance
+        for (let i = 0; i < 3; i++) {
+          hearts.push(createHeart());
+        }
+      }
+
+      hearts.forEach((h, i) => {
+        h.y += h.dy;
+        drawHeart(h.x, h.y, h.size, h.color);
+
+        if (h.y > canvas.height) {
+          hearts.splice(i, 1);
+        }
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    // Alternar foto P&B e colorida
+    const mainImage = document.getElementById('mainImage');
+    mainImage.addEventListener('click', () => {
+      if (mainImage.src.includes('HVxrX9W2')) {
+        mainImage.src = 'https://i.postimg.cc/s11zJ6Sv/foto-colorida.jpg';
+      } else {
+        mainImage.src = 'https://i.postimg.cc/HVxrX9W2/foto-pb.jpg';
+      }
     });
 
-    foto.addEventListener("click", () => {
-      foto.src = "https://i.postimg.cc/s11zJ6Sv/foto-colorida.jpg";
-    });
+    animate();
   </script>
 </body>
 </html>
